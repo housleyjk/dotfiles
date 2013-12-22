@@ -22,6 +22,7 @@ if has('vim_starting')
   \ }
 
  NeoBundle 'Shougo/unite.vim'
+ NeoBundle 'Shougo/unite-session'
  NeoBundle 'Shougo/neocomplete.vim'
  NeoBundle 'Shougo/vimshell.vim'
  NeoBundle 'Shougo/neosnippet.vim'
@@ -33,7 +34,7 @@ if has('vim_starting')
  NeoBundle 'airblade/vim-gitgutter'
  NeoBundle 'bling/vim-bufferline'
  NeoBundle 'vim-scripts/fugitive.vim'
- 
+ NeoBundle 'mbbill/undotree' 
 
  " Colors
  NeoBundle 'vim-scripts/Colour-Sampler-Pack'
@@ -89,9 +90,9 @@ let g:neocomplete#sources#dictionary#dictionaries = {
 " <CR>: close popup and save indent.
  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
  function! s:my_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
+    "return neocomplete#close_popup() . "\<CR>"
    " For no inserting <CR> key.
-   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+   return pumvisible() ? neocomplete#close_popup() : "\<CR>"
  endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -186,6 +187,14 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
 " let g:pymode_folding = 0
+
+" UndoTree Settings
+if has("persistent_undo")
+    set undodir=~/.vim/undodir
+    set undofile
+    set undolevels = 1000 "maximum number of changes that can be undone
+    set undoreload = 10000 "maximum number lines to save for undo on a buffer reload
+endif
 
 "Use ag for searching
 if executable('ag')
