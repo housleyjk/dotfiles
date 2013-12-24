@@ -31,10 +31,13 @@ if has('vim_starting')
  NeoBundle 'klen/python-mode'
  NeoBundle 'davidhalter/jedi-vim'
  NeoBundle 'bling/vim-airline'
- NeoBundle 'airblade/vim-gitgutter'
+ NeoBundle 'mhinz/vim-signify'
  NeoBundle 'bling/vim-bufferline'
  NeoBundle 'vim-scripts/fugitive.vim'
  NeoBundle 'mbbill/undotree' 
+ NeoBundle 'h1mesuke/unite-outline' 
+ NeoBundleLazy 'spf13/PIV' 
+ NeoBundle 'scrooloose/syntastic' 
 
  " Colors
  NeoBundle 'vim-scripts/Colour-Sampler-Pack'
@@ -47,6 +50,7 @@ if has('vim_starting')
  filetype plugin indent on     " Required!
  syntax on
  set background=dark
+ set t_Co=256
  set number
  set tabstop=8
  set expandtab
@@ -54,11 +58,20 @@ if has('vim_starting')
  set softtabstop=4
  set scrolloff=5
  colorscheme jellybeans
-
+ set nowrap
 
  " Unite Keys
  noremap <Leader>n :Unite
- 
+
+" UniteSession Settings
+let g:unite_source_session_enable_auto_save = 1
+
+
+" Airline Settings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+
 " Neocomplete Settings
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -147,9 +160,9 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
   endif
 
 "VimFiler Settings
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_edit_action = 'tabopen'
-
+let g:vimfiler_as_default_explorer=1
+"let g:vimfiler_edit_action='tabopen'
+nnoremap <Leader>f :VimFiler -explorer -toggle<CR>
 
 " Python-mode
 " Deactivate rope
@@ -164,7 +177,7 @@ let g:pymode_rope = 0
 
 " Documentation
 let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
+let g:pymode_doc_key='K'
 
 "Linting
 let g:pymode_lint = 1
@@ -192,9 +205,15 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 if has("persistent_undo")
     set undodir=~/.vim/undodir
     set undofile
-    set undolevels = 1000 "maximum number of changes that can be undone
-    set undoreload = 10000 "maximum number lines to save for undo on a buffer reload
+    set undolevels=1000 "maximum number of changes that can be undone
+    set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 endif
+
+" PIV Settings
+
+"Load PIV for php files
+autocmd FileType php NeoBundleSource PIV
+
 
 "Use ag for searching
 if executable('ag')
