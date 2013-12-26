@@ -40,9 +40,11 @@ if has('vim_starting')
  NeoBundle 'scrooloose/syntastic' 
  NeoBundle 'scrooloose/nerdcommenter'
  NeoBundleLazy 'spf13/PIV' 
-
+ NeoBundle 'tpope/vim-unimpaired'
+ NeoBundle 'nanotech/jellybeans.vim'
+ 
  " Colors
- NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+ "NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 
 
  " Installation check.
@@ -75,6 +77,12 @@ let g:unite_source_session_enable_auto_save = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 set laststatus=2
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 
 " Neocomplete Settings
 " Disable AutoComplPop.
@@ -165,7 +173,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "VimFiler Settings
 let g:vimfiler_as_default_explorer=1
-"let g:vimfiler_edit_action='tabopen'
+let g:vimfiler_edit_action='tabopen'
 nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
 
 " Python-mode
@@ -220,8 +228,8 @@ autocmd FileType php NeoBundleSource PIV
 
 
 "NERDcommenter Settings
-noremap <Leader><Space> <Leader>c<Space>
-
+ nmap <Leader>/ <leader>c<Space>
+ vmap <Leader>/ <leader>c<Space>
 
 "Use ag for searching
 if executable('ag')
