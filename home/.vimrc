@@ -21,6 +21,7 @@ if has('vim_starting')
   \    },
   \ }
 
+
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'Shougo/unite-session'
  NeoBundle 'Shougo/neocomplete.vim'
@@ -36,12 +37,14 @@ if has('vim_starting')
  NeoBundle 'vim-scripts/fugitive.vim'
  NeoBundle 'mbbill/undotree' 
  NeoBundle 'h1mesuke/unite-outline' 
- NeoBundleLazy 'spf13/PIV' 
  NeoBundle 'scrooloose/syntastic' 
+ NeoBundle 'scrooloose/nerdcommenter'
+ NeoBundleLazy 'spf13/PIV' 
 
  " Colors
  NeoBundle 'vim-scripts/Colour-Sampler-Pack'
- 
+
+
  " Installation check.
  NeoBundleCheck
 
@@ -61,7 +64,8 @@ if has('vim_starting')
  set nowrap
 
  " Unite Keys
- noremap <Leader>n :Unite
+ noremap <Leader><Leader> :Unite
+ noremap <Leader>f :Unite file_rec/async -start-insert<CR>
 
 " UniteSession Settings
 let g:unite_source_session_enable_auto_save = 1
@@ -70,7 +74,7 @@ let g:unite_source_session_enable_auto_save = 1
 " Airline Settings
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-
+set laststatus=2
 
 " Neocomplete Settings
 " Disable AutoComplPop.
@@ -162,7 +166,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 "VimFiler Settings
 let g:vimfiler_as_default_explorer=1
 "let g:vimfiler_edit_action='tabopen'
-nnoremap <Leader>f :VimFiler -explorer -toggle<CR>
+nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
 
 " Python-mode
 " Deactivate rope
@@ -213,6 +217,10 @@ endif
 
 "Load PIV for php files
 autocmd FileType php NeoBundleSource PIV
+
+
+"NERDcommenter Settings
+noremap <Leader><Space> <Leader>c<Space>
 
 
 "Use ag for searching
