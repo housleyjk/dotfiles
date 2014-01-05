@@ -24,12 +24,13 @@ if has('vim_starting')
 
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'Shougo/unite-session'
+ NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/neocomplete.vim'
  NeoBundle 'Shougo/vimshell.vim'
  NeoBundle 'Shougo/neosnippet.vim'
  NeoBundle 'Shougo/vimfiler.vim'
  NeoBundle 'jimsei/winresizer'  
- NeoBundle 'klen/python-mode'
+ NeoBundleLazy 'klen/python-mode'
  NeoBundle 'davidhalter/jedi-vim'
  NeoBundle 'bling/vim-airline'
  NeoBundle 'mhinz/vim-signify'
@@ -42,7 +43,8 @@ if has('vim_starting')
  NeoBundleLazy 'spf13/PIV' 
  NeoBundle 'tpope/vim-unimpaired'
  NeoBundle 'nanotech/jellybeans.vim'
- 
+ NeoBundle 'vim-scripts/sudo.vim'
+
  " Colors
  "NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 
@@ -66,8 +68,10 @@ if has('vim_starting')
  set nowrap
 
  " Unite Keys
- noremap <Leader><Leader> :Unite
- noremap <Leader>f :Unite file_rec/async -start-insert<CR>
+ call unite#filters#matcher_default#use(['matcher_fuzzy'])
+ noremap <Leader><Leader> :Unite<Space>
+ "noremap <Leader>f :Unite file_rec/async -start-insert<CR>
+ nnoremap <leader>f :<C-u>Unite -start-insert file_rec/async:!<CR>
 
 " UniteSession Settings
 let g:unite_source_session_enable_auto_save = 1
@@ -134,8 +138,9 @@ inoremap <expr><C-e> neocomplete#cancel_popup()
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=jedi#complete
+autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -150,7 +155,10 @@ if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
 
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+let g:neocomplete#force_omni_input_patterns.python =
+\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+
+"let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 " NeoSnippet Settings
 
@@ -185,6 +193,11 @@ nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
 " ]]            Jump on next class or function (normal, visual, operator modes)
 " [M            Jump on previous class or method (normal, visual, operator modes)
 " ]M            Jump on next class or method (normal, visual, operator modes)
+
+autocmd FileType python NeoBundleSource python-mode
+"autocmd FileType python NeoBundleSource jedi-vim
+"autocmd FileType python NeoBundleDisable Neocomplete
+
 let g:pymode_rope = 0
 
 " Documentation
@@ -225,7 +238,7 @@ endif
 
 "Load PIV for php files
 autocmd FileType php NeoBundleSource PIV
-
+autocmd FileType php NeoBundleDisable Neocomplete
 
 "NERDcommenter Settings
  nmap <Leader>/ <leader>c<Space>
