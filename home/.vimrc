@@ -4,6 +4,10 @@ if has('vim_starting')
    set runtimepath+=~/.vim/bundle/neobundle.vim/
  endif
 
+if has('gui_running')
+  guifont=Meslo\ LG\ S\ for\ Powerline\ 10
+endif
+
  call neobundle#rc(expand('~/.vim/bundle/'))
 
  let mapleader=","
