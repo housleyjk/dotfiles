@@ -5,7 +5,7 @@ if has('vim_starting')
  endif
 
 if has('gui_running')
-  set guifont=Meslo\ LG\ S\ for\ Powerline\ 10
+  set guifont=Liberation\ Mono\ for\ Powerline\ 10
 endif
 
  call neobundle#rc(expand('~/.vim/bundle/'))
@@ -28,6 +28,7 @@ endif
 
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'Shougo/unite-session'
+ NeoBundle 'tsukkee/unite-tag' 
  NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/neocomplete.vim'
  NeoBundle 'Shougo/vimshell.vim'
@@ -36,10 +37,9 @@ endif
  NeoBundle 'jimsei/winresizer'  
  NeoBundleLazy 'klen/python-mode'
  NeoBundle 'davidhalter/jedi-vim'
- NeoBundle 'bling/vim-airline'
  NeoBundle 'mhinz/vim-signify'
  NeoBundle 'bling/vim-bufferline'
- NeoBundle 'vim-scripts/fugitive.vim'
+ NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'mbbill/undotree' 
  NeoBundle 'h1mesuke/unite-outline' 
  NeoBundle 'scrooloose/syntastic' 
@@ -48,6 +48,8 @@ endif
  NeoBundle 'tpope/vim-unimpaired'
  NeoBundle 'nanotech/jellybeans.vim'
  NeoBundle 'vim-scripts/sudo.vim'
+ NeoBundle 'bling/vim-airline'
+ NeoBundle 'jmcantrell/vim-virtualenv'
 
  " Colors
  "NeoBundle 'vim-scripts/Colour-Sampler-Pack'
@@ -57,7 +59,6 @@ endif
  NeoBundleCheck
 
  " Key bindings
-
  filetype plugin indent on     " Required!
  syntax on
  set background=dark
@@ -71,7 +72,10 @@ endif
  colorscheme jellybeans
  set nowrap
  imap <C-s> <Esc>:w<CR>i
-
+ imap <C-y> <Esc>"+y
+ nmap <C-y> "+y
+ imap <C-p> <Esc>"+p
+ nmap <C-p> "+p
 
  " Unite Keys
  call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -91,6 +95,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
+let g:airline_symbols.branch = "\uf020"
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 
@@ -217,7 +222,7 @@ let g:pymode_lint_checker = "pyflakes,pep8"
 let g:pymode_lint_write = 1
 
 " Support virtualenv
-let g:pymode_virtualenv = 1
+let g:pymode_virtualenv = 0
 
 " Enable breakpoints plugin
 let g:pymode_breakpoint = 1
@@ -264,6 +269,10 @@ if executable('ag')
 	  \  '--ignore .git --ignore .bzr --ignore node_modules ' .
 	  \  '--ignore bower_components --hidden -g ""'
 endif
+
+"VimShell Settings
+autocmd filetype vimshell inoremap <buffer> <expr><silent> <Up> unite#sources#vimshell_history#start_complete(!0)
+
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
