@@ -5,7 +5,7 @@ if has('vim_starting')
  endif
 
 if has('gui_running')
-  guifont=Meslo\ LG\ S\ for\ Powerline\ 10
+  set guifont=Meslo\ LG\ S\ for\ Powerline\ 10
 endif
 
  call neobundle#rc(expand('~/.vim/bundle/'))
@@ -70,6 +70,8 @@ endif
  set scrolloff=5
  colorscheme jellybeans
  set nowrap
+ imap <C-s> <Esc>:w<CR>i
+
 
  " Unite Keys
  call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -242,7 +244,7 @@ endif
 
 "Load PIV for php files
 autocmd FileType php NeoBundleSource PIV
-autocmd FileType php NeoBundleDisable Neocomplete
+autocmd FileType php NeoBundleDisable neocomplete
 
 "NERDcommenter Settings
  nmap <Leader>/ <leader>c<Space>
