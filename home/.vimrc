@@ -69,7 +69,7 @@ endif
  set scrolloff=5
  colorscheme jellybeans
  set nowrap
- imap <C-s> <Esc>:w<CR>i
+ imap <C-w> <Esc>:up<CR>
  imap <C-y> <Esc>"+y
  nmap <C-y> "+y
  imap <C-p> <Esc>"+p
