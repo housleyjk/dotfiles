@@ -50,9 +50,7 @@ endif
  NeoBundle 'vim-scripts/sudo.vim'
  NeoBundle 'bling/vim-airline'
  NeoBundle 'jmcantrell/vim-virtualenv'
-
- " Colors
- "NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+ NeoBundle 'kannokanno/unite-todo' 
 
 
  " Installation check.
@@ -80,8 +78,8 @@ endif
  " Unite Keys
  call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
- "noremap <Leader>f :Unite file_rec/async -start-insert<CR>
- nnoremap <leader>f :<C-u>Unite -start-insert file_rec/async:!<CR>
+ nnoremap <Leader>f :Unite find:.<CR>
+ nnoremap <leader>r :<C-u>Unite -start-insert file_rec/async:!<CR>
 
 " UniteSession Settings
 let g:unite_source_session_enable_auto_save = 1
@@ -192,7 +190,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "VimFiler Settings
 let g:vimfiler_as_default_explorer=1
-let g:vimfiler_edit_action='tabopen'
+"let g:vimfiler_edit_action='tabopen'
 nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
 
 " Python-mode
@@ -272,6 +270,16 @@ endif
 
 "VimShell Settings
 autocmd filetype vimshell inoremap <buffer> <expr><silent> <Up> unite#sources#vimshell_history#start_complete(!0)
+
+
+" Todo Settings
+nmap <Leader>ts :UniteTodoAddSimple<Space>
+nmap <Leader>tb :UniteTodoAddBuffer<Space>
+
+" Incode Task mappings
+nmap <Leader>tl :Unite -silent -auto-resize grep:*::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
+nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
+nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 
 
 if !has('vim_starting')
