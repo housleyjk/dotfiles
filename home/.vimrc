@@ -67,13 +67,21 @@ endif
  set shiftwidth=4
  set softtabstop=4
  set scrolloff=5
+ set hlsearch
  colorscheme jellybeans
  set nowrap
- imap <C-w> <Esc>:up<CR>
- imap <C-y> <Esc>"+y
- nmap <C-y> "+y
- imap <C-p> <Esc>"+p
- nmap <C-p> "+p
+ nmap <silent> <C-Up> :wincmd k<CR>
+ nmap <silent> <C-Down> :wincmd j<CR>
+ nmap <silent> <C-Left> :wincmd h<CR>
+ nmap <silent> <C-Right> :wincmd l<CR>
+ imap <silent> <C-w> <Esc> :w<CR>
+ nmap <silent> <C-w> :w<CR>
+ vmap <silent> <C-y> "+y
+ nmap <silent> <C-y> "+Y
+ imap <silent> <C-p> <Esc> "+pi
+ nmap <silent> <C-p> "+p
+
+
 
  " Unite Keys
  call unite#filters#matcher_default#use(['matcher_fuzzy'])
