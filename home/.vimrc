@@ -51,7 +51,9 @@ endif
  NeoBundle 'bling/vim-airline'
  NeoBundle 'jmcantrell/vim-virtualenv'
  NeoBundle 'kannokanno/unite-todo' 
-
+ NeoBundle 'terryma/vim-multiple-cursors' 
+ NeoBundle 'tpope/vim-surround'
+ NeoBundle 'tpope/vim-repeat'
 
  " Installation check.
  NeoBundleCheck
@@ -69,6 +71,7 @@ endif
  set scrolloff=5
  set hlsearch
  colorscheme jellybeans
+ set guioptions-=T  "remove toolbar
  set nowrap
  nmap <silent> <C-Up> :wincmd k<CR>
  nmap <silent> <C-Down> :wincmd j<CR>
@@ -80,7 +83,7 @@ endif
  nmap <silent> <C-y> "+Y
  imap <silent> <C-p> <Esc> "+pi
  nmap <silent> <C-p> "+p
-
+ nmap ~ :VimProcBang<Space>
 
 
  " Unite Keys
@@ -101,7 +104,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
-let g:airline_symbols.branch = "\uf020"
+"let g:airline_symbols.branch = "\uf020"
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 
@@ -224,6 +227,8 @@ let g:pymode_doc_key='K'
 "Linting
 let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
+let g:pymode_lint_ignore="E501"
+
 " Auto check on save
 let g:pymode_lint_write = 1
 
@@ -270,10 +275,10 @@ if executable('ag')
       \  '--ignore node_modules --ignore bower_components'
   let g:unite_source_grep_recursive_opt = ''
 
-  let g:unite_source_rec_async_command =
-	  \  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
-	  \  '--ignore .git --ignore .bzr --ignore node_modules ' .
-	  \  '--ignore bower_components --hidden -g ""'
+  "let g:unite_source_rec_async_command =
+	  "\  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
+	  "\  '--ignore .git --ignore .bzr --ignore node_modules ' .
+	  "\  '--ignore bower_components --hidden -g ""'
 endif
 
 "VimShell Settings
