@@ -11,7 +11,7 @@ endif
  call neobundle#rc(expand('~/.vim/bundle/'))
 
  let mapleader=","
- let g:neobundle#types#git#default_protocol = 'git' 
+ let g:neobundle#types#git#default_protocol = 'git'
 
  " Bundles
  " Note: You don't set neobundle setting in .gvimrc!
@@ -28,14 +28,13 @@ endif
 
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'Shougo/unite-session'
- NeoBundle 'tsukkee/unite-tag' 
+ NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/neocomplete.vim'
  NeoBundle 'Shougo/vimshell.vim'
  NeoBundle 'Shougo/neosnippet.vim'
  NeoBundle 'Shougo/vimfiler.vim'
- NeoBundle 'jimsei/winresizer'  
- NeoBundleLazy 'klen/python-mode'
+ NeoBundle 'jimsei/winresizer' 
  NeoBundle 'davidhalter/jedi-vim'
  NeoBundle 'mhinz/vim-signify'
  NeoBundle 'bling/vim-bufferline'
@@ -44,7 +43,6 @@ endif
  NeoBundle 'h1mesuke/unite-outline' 
  NeoBundle 'scrooloose/syntastic' 
  NeoBundle 'scrooloose/nerdcommenter'
- NeoBundleLazy 'spf13/PIV' 
  NeoBundle 'tpope/vim-unimpaired'
  NeoBundle 'nanotech/jellybeans.vim'
  NeoBundle 'vim-scripts/sudo.vim'
@@ -83,8 +81,10 @@ endif
  nmap <silent> <C-y> "+Y
  imap <silent> <C-p> <Esc> "+pi
  nmap <silent> <C-p> "+p
- nmap ~ :VimProcBang<Space>
 
+
+ " VimProc Settings
+ nmap ~ :VimProcBang<Space>
 
  " Unite Keys
  call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -106,11 +106,11 @@ endif
 let g:airline_symbols.space = "\ua0"
 "let g:airline_symbols.branch = "\uf020"
 let g:airline#extensions#tabline#fnamemod = ':t'
-
+let g:airline_theme="luna"
 
 " Neocomplete Settings
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
+let g:acp_enableAtStartup = 0 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
@@ -169,7 +169,10 @@ endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 
+" Jedi-Vim Settings
 let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_enabled=0
+let g:jedi#popup_select_first = 0
 
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
@@ -204,50 +207,6 @@ let g:vimfiler_as_default_explorer=1
 "let g:vimfiler_edit_action='tabopen'
 nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
 
-" Python-mode
-" Deactivate rope
-" Keys:
-" K             Show python docs
-" b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-
-autocmd FileType python NeoBundleSource python-mode
-"autocmd FileType python NeoBundleSource jedi-vim
-"autocmd FileType python NeoBundleDisable Neocomplete
-
-let g:pymode_rope = 0
-
-" Documentation
-let g:pymode_doc = 1
-let g:pymode_doc_key='K'
-
-"Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
-let g:pymode_lint_ignore="E501"
-
-" Auto check on save
-let g:pymode_lint_write = 1
-
-" Support virtualenv
-let g:pymode_virtualenv = 0
-
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = 'b'
-
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-
-" Don't autofold code
-" let g:pymode_folding = 0
-
 " UndoTree Settings
 if has("persistent_undo")
     set undodir=~/.vim/undodir
@@ -255,12 +214,6 @@ if has("persistent_undo")
     set undolevels=1000 "maximum number of changes that can be undone
     set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 endif
-
-" PIV Settings
-
-"Load PIV for php files
-autocmd FileType php NeoBundleSource PIV
-autocmd FileType php NeoBundleDisable neocomplete
 
 "NERDcommenter Settings
  nmap <Leader>/ <leader>c<Space>
@@ -278,7 +231,7 @@ if executable('ag')
   "let g:unite_source_rec_async_command =
 	  "\  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
 	  "\  '--ignore .git --ignore .bzr --ignore node_modules ' .
-	  "\  '--ignore bower_components --hidden -g ""'
+	  "\  '--ignore bower_components --hidden -g '
 endif
 
 "VimShell Settings
