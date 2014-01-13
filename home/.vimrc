@@ -30,6 +30,7 @@ endif
  NeoBundle 'Shougo/unite-session'
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'Shougo/unite-sudo'
+ NeoBundle 'Shougo/unite-ssh'
  NeoBundle 'Shougo/neocomplete.vim'
  NeoBundle 'Shougo/vimshell.vim'
  NeoBundle 'Shougo/neosnippet.vim'
@@ -54,7 +55,7 @@ endif
  NeoBundle 'tpope/vim-repeat'
  NeoBundle 't9md/vim-choosewin'
  NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
- 
+
  " Installation check.
  NeoBundleCheck
 
@@ -73,12 +74,14 @@ endif
  colorscheme jellybeans
  set guioptions-=T  "remove toolbar
  set nowrap
- nmap <silent> <C-Up> :wincmd k<CR>
- nmap <silent> <C-Down> :wincmd j<CR>
- nmap <silent> <C-Left> :wincmd h<CR>
- nmap <silent> <C-Right> :wincmd l<CR>
- imap <silent> <C-w> <Esc> :w<CR>
- nmap <silent> <C-w> :w<CR>
+ "nmap <silent> <C-Up> :wincmd k<CR>
+ "nmap <silent> <C-Down> :wincmd j<CR>
+ "nmap <silent> <C-Left> :wincmd h<CR>
+ "nmap <silent> <C-Right> :wincmd l<CR>
+ "imap <silent> <C-w> <Esc> :w<CR>
+ "nmap <silent> <C-w> :w<CR>
+ imap <silent> <C-j> <Esc>:w<CR>
+ nmap <silent> <C-j> :w<CR>
  vmap <silent> <C-y> "+y
  nmap <silent> <C-y> "+Y
  imap <silent> <C-p> <Esc> "+pi
@@ -89,7 +92,7 @@ endif
  nmap ~ :VimProcBang<Space>
 
  " Unite Keys
- call unite#filters#matcher_default#use(['matcher_fuzzy'])
+ "call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
  nnoremap <Leader>f :Unite find:.<CR>
  nnoremap <leader>r :<C-u>Unite -start-insert file_rec/async:!<CR>
@@ -106,7 +109,6 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
-let g:airline_symbols.branch = "\uf020"
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme="luna"
 
@@ -175,6 +177,7 @@ let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#completions_enabled=0
 let g:jedi#popup_select_first = 0
+let g:jedi#use_tabs_not_buffers = 0
 
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
