@@ -34,25 +34,27 @@ endif
  NeoBundle 'Shougo/vimshell.vim'
  NeoBundle 'Shougo/neosnippet.vim'
  NeoBundle 'Shougo/vimfiler.vim'
- NeoBundle 'jimsei/winresizer' 
- NeoBundle 'davidhalter/jedi-vim'
+ NeoBundle 'jimsei/winresizer'
+ NeoBundleLazy 'davidhalter/jedi-vim', {'autoload': {'filetypes': ['python'] }}
  NeoBundle 'mhinz/vim-signify'
  NeoBundle 'bling/vim-bufferline'
  NeoBundle 'tpope/vim-fugitive'
- NeoBundle 'mbbill/undotree' 
- NeoBundle 'h1mesuke/unite-outline' 
- NeoBundle 'scrooloose/syntastic' 
+ NeoBundle 'mbbill/undotree'
+ NeoBundle 'h1mesuke/unite-outline'
+ NeoBundle 'scrooloose/syntastic'
  NeoBundle 'scrooloose/nerdcommenter'
  NeoBundle 'tpope/vim-unimpaired'
  NeoBundle 'nanotech/jellybeans.vim'
  NeoBundle 'vim-scripts/sudo.vim'
  NeoBundle 'bling/vim-airline'
- NeoBundle 'jmcantrell/vim-virtualenv'
- NeoBundle 'kannokanno/unite-todo' 
- NeoBundle 'terryma/vim-multiple-cursors' 
+ NeoBundleLazy 'jmcantrell/vim-virtualenv', {'autoload': {'filetypes': ['python'] }}
+ NeoBundle 'kannokanno/unite-todo'
+ NeoBundle 'terryma/vim-multiple-cursors'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
-
+ NeoBundle 't9md/vim-choosewin'
+ NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
+ 
  " Installation check.
  NeoBundleCheck
 
@@ -97,20 +99,20 @@ let g:unite_source_session_enable_auto_save = 1
 
 
 " Airline Settings
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 1
 set laststatus=2
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
-"let g:airline_symbols.branch = "\uf020"
+let g:airline_symbols.branch = "\uf020"
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme="luna"
 
 " Neocomplete Settings
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0 
+let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
@@ -228,10 +230,10 @@ if executable('ag')
       \  '--ignore node_modules --ignore bower_components'
   let g:unite_source_grep_recursive_opt = ''
 
-  "let g:unite_source_rec_async_command =
-	  "\  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
-	  "\  '--ignore .git --ignore .bzr --ignore node_modules ' .
-	  "\  '--ignore bower_components --hidden -g '
+  let g:unite_source_rec_async_command =
+          \  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
+          \  '--ignore .git --ignore .bzr --ignore node_modules ' .
+          \  '--ignore bower_components --hidden -g '
 endif
 
 "VimShell Settings
