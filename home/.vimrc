@@ -31,14 +31,15 @@ endif
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/unite-ssh'
+ NeoBundle 'tacroe/unite-mark'
  NeoBundle 'Shougo/neocomplete.vim'
  NeoBundle 'Shougo/vimshell.vim'
- NeoBundle 'Shougo/neosnippet.vim'
+ NeoBundle 'Shougo/neosnippet.vim', {'depends': 'Shougo/neosnippet-snippets'}
  NeoBundle 'Shougo/vimfiler.vim'
  NeoBundle 'jimsei/winresizer'
  NeoBundleLazy 'davidhalter/jedi-vim', {'autoload': {'filetypes': ['python'] }}
  NeoBundle 'mhinz/vim-signify'
- NeoBundle 'bling/vim-bufferline'
+ "NeoBundle 'bling/vim-bufferline'
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'mbbill/undotree'
  NeoBundle 'h1mesuke/unite-outline'
@@ -50,11 +51,12 @@ endif
  NeoBundle 'bling/vim-airline'
  NeoBundleLazy 'jmcantrell/vim-virtualenv', {'autoload': {'filetypes': ['python'] }}
  NeoBundle 'kannokanno/unite-todo'
- NeoBundle 'terryma/vim-multiple-cursors'
+ NeoBundle 'housleyjk/vim-multiple-cursors'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
- NeoBundle 't9md/vim-choosewin'
  NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
+ NeoBundleLazy 'm2mdas/phpcomplete-extended', {'autoload': {'filetypes': ['php', 'phtml'] }}
+
 
  " Installation check.
  NeoBundleCheck
@@ -74,12 +76,8 @@ endif
  colorscheme jellybeans
  set guioptions-=T  "remove toolbar
  set nowrap
- "nmap <silent> <C-Up> :wincmd k<CR>
- "nmap <silent> <C-Down> :wincmd j<CR>
- "nmap <silent> <C-Left> :wincmd h<CR>
- "nmap <silent> <C-Right> :wincmd l<CR>
- "imap <silent> <C-w> <Esc> :w<CR>
- "nmap <silent> <C-w> :w<CR>
+ set laststatus=2
+
  imap <silent> <C-j> <Esc>:w<CR>
  nmap <silent> <C-j> :w<CR>
  vmap <silent> <C-y> "+y
@@ -92,7 +90,7 @@ endif
  nmap ~ :VimProcBang<Space>
 
  " Unite Keys
- "call unite#filters#matcher_default#use(['matcher_fuzzy'])
+ call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
  nnoremap <Leader>f :Unite find:.<CR>
  nnoremap <leader>r :<C-u>Unite -start-insert file_rec/async:!<CR>
@@ -102,19 +100,19 @@ let g:unite_source_session_enable_auto_save = 1
 
 
 " Airline Settings
-let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#enabled = 1 
 let g:airline_powerline_fonts = 1
-set laststatus=2
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_theme="luna"
 
 " Neocomplete Settings
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
+let g:acp_enableAtStartup = 0 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
@@ -166,19 +164,6 @@ autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
- let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-
-
-" Jedi-Vim Settings
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#completions_enabled=0
-let g:jedi#popup_select_first = 0
-let g:jedi#use_tabs_not_buffers = 0
-
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
@@ -186,7 +171,12 @@ endif
 let g:neocomplete#force_omni_input_patterns.python =
 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
-"let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+" Jedi-Vim Settings
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_enabled=0
+let g:jedi#popup_select_first = 0
+let g:jedi#use_tabs_not_buffers = 0
+
 
 " NeoSnippet Settings
 
