@@ -84,7 +84,7 @@ endif
  nmap <silent> <C-y> "+Y
  imap <silent> <C-p> <Esc> "+pi
  nmap <silent> <C-p> "+p
-
+ nmap <silent> <Leader>ds :%s/\s\+$//<CR>
 
  " VimProc Settings
  nmap ~ :VimProcBang<Space>
@@ -100,7 +100,7 @@ let g:unite_source_session_enable_auto_save = 1
 
 
 " Airline Settings
-let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -108,11 +108,14 @@ endif
 let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_theme="luna"
 
 " Neocomplete Settings
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0 
+let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
