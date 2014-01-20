@@ -27,7 +27,8 @@ endif
 
 
  NeoBundle 'Shougo/unite.vim'
- NeoBundle 'Shougo/unite-session'
+ "NeoBundle 'Shougo/unite-session'
+ NeoBundle 'housleyjk/unite-session'
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/unite-ssh'
