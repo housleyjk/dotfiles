@@ -107,10 +107,6 @@ if executable('ag')
       \  '--ignore node_modules --ignore bower_components'
   let g:unite_source_grep_recursive_opt = ''
 
-  let g:unite_source_rec_async_command =
-          \  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
-          \  '--ignore .git --ignore .bzr --ignore node_modules ' .
-          \  '--ignore bower_components --hidden -g '
 endif
 
 " Incode Task mappings
