@@ -49,14 +49,14 @@ endif
  NeoBundle 'nanotech/jellybeans.vim'
  NeoBundle 'vim-scripts/sudo.vim'
  NeoBundle 'bling/vim-airline'
- NeoBundleLazy 'jmcantrell/vim-virtualenv', {'autoload': {'filetypes': ['python'] }}
+ NeoBundle 'jmcantrell/vim-virtualenv'
  NeoBundle 'kannokanno/unite-todo'
  NeoBundle 'housleyjk/vim-multiple-cursors'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
  NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
  NeoBundleLazy 'm2mdas/phpcomplete-extended', {'autoload': {'filetypes': ['php', 'phtml'] }}
-
+ NeoBundle 'vim-scripts/matchit.zip'
 
  " Installation check.
  NeoBundleCheck
@@ -84,8 +84,7 @@ endif
  nmap <silent> <C-y> "+Y
  imap <silent> <C-p> <Esc> "+pi
  nmap <silent> <C-p> "+p
- nmap <silent> <Leader>ds :%s/\s\+$//<CR>
-
+ nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
  " VimProc Settings
  nmap ~ :VimProcBang<Space>
 
@@ -93,7 +92,7 @@ endif
  call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
  nnoremap <Leader>f :Unite find:.<CR>
- nnoremap <leader>r :<C-u>Unite -start-insert file_rec/async:!<CR>
+ nnoremap <leader>t :Unite -start-insert file_rec/async:!<CR>
 
 " UniteSession Settings
 let g:unite_source_session_enable_auto_save = 1
@@ -226,10 +225,10 @@ if executable('ag')
       \  '--ignore node_modules --ignore bower_components'
   let g:unite_source_grep_recursive_opt = ''
 
-  let g:unite_source_rec_async_command =
-          \  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
-          \  '--ignore .git --ignore .bzr --ignore node_modules ' .
-          \  '--ignore bower_components --hidden -g '
+  "let g:unite_source_rec_async_command =
+          "\  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
+          "\  '--ignore .git --ignore .bzr --ignore node_modules ' .
+          "\  '--ignore bower_components --hidden -g '
 endif
 
 "VimShell Settings
@@ -244,7 +243,6 @@ nmap <Leader>tb :UniteTodoAddBuffer<Space>
 nmap <Leader>tl :Unite -silent -auto-resize grep:*::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
-
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
