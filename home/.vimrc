@@ -58,6 +58,7 @@ endif
  NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
  NeoBundleLazy 'm2mdas/phpcomplete-extended', {'autoload': {'filetypes': ['php', 'phtml'] }}
  NeoBundle 'vim-scripts/matchit.zip'
+ NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
  " Installation check.
  NeoBundleCheck
@@ -245,8 +246,10 @@ nmap <Leader>tl :Unite -silent -auto-resize grep:*::TODO\|Todo\|todo\|FIXME\|NOT
 nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 
+" Javascript 
+au FileType javascript call JavaScriptFold()
+
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
   call neobundle#call_hook('on_source')
 endif
-
