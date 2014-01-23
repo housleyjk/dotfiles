@@ -11,7 +11,6 @@ endif
  call neobundle#rc(expand('~/.vim/bundle/'))
 
  let mapleader=","
- let g:neobundle#types#git#default_protocol = 'git'
 
  " Bundles
  " Note: You don't set neobundle setting in .gvimrc!
@@ -27,8 +26,7 @@ endif
 
 
  NeoBundle 'Shougo/unite.vim'
- "NeoBundle 'Shougo/unite-session'
- NeoBundle 'housleyjk/unite-session'
+ NeoBundle 'Shougo/unite-session'
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/unite-ssh'
@@ -40,7 +38,6 @@ endif
  NeoBundle 'jimsei/winresizer'
  NeoBundleLazy 'davidhalter/jedi-vim', {'autoload': {'filetypes': ['python'] }}
  NeoBundle 'mhinz/vim-signify'
- "NeoBundle 'bling/vim-bufferline'
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'mbbill/undotree'
  NeoBundle 'h1mesuke/unite-outline'
@@ -51,7 +48,6 @@ endif
  NeoBundle 'vim-scripts/sudo.vim'
  NeoBundle 'bling/vim-airline'
  NeoBundle 'jmcantrell/vim-virtualenv'
- NeoBundle 'kannokanno/unite-todo'
  NeoBundle 'housleyjk/vim-multiple-cursors'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
@@ -86,7 +82,9 @@ endif
  nmap <silent> <C-y> "+Y
  imap <silent> <C-p> <Esc> "+pi
  nmap <silent> <C-p> "+p
+ nmap <silent> <Leader>s :VimShell<CR>
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
+
  " VimProc Settings
  nmap ~ :VimProcBang<Space>
 
@@ -94,7 +92,7 @@ endif
  call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
  nnoremap <Leader>f :Unite find:.<CR>
- nnoremap <leader>t :Unite -start-insert file_rec/async:!<CR>
+ nnoremap <leader>r :Unite -start-insert file_rec/async:!<CR>
 
 " UniteSession Settings
 let g:unite_source_session_enable_auto_save = 1
@@ -233,15 +231,7 @@ if executable('ag')
           "\  '--ignore bower_components --hidden -g '
 endif
 
-"VimShell Settings
-autocmd filetype vimshell inoremap <buffer> <expr><silent> <Up> unite#sources#vimshell_history#start_complete(!0)
-
-
-" Todo Settings
-nmap <Leader>ts :UniteTodoAddSimple<Space>
-nmap <Leader>tb :UniteTodoAddBuffer<Space>
-
-" Incode Task mappings
+" Inline Task mappings
 nmap <Leader>tl :Unite -silent -auto-resize grep:*::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
