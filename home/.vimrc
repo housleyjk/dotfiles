@@ -202,6 +202,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "VimFiler Settings
 let g:vimfiler_as_default_explorer=1
+let g:vimfiler_ignore_pattern = '^\.\|\.pyc$'
 "let g:vimfiler_edit_action='tabopen'
 nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
 
@@ -237,7 +238,7 @@ nmap <Leader>tl :Unite -silent -auto-resize grep:*::TODO\|Todo\|todo\|FIXME\|NOT
 nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 
-" Javascript 
+" Javascript
 au FileType javascript call JavaScriptFold()
 
 if !has('vim_starting')
