@@ -51,7 +51,7 @@ endif
  NeoBundle 'housleyjk/vim-multiple-cursors'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
- NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
+ "NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
  NeoBundleLazy 'm2mdas/phpcomplete-extended', {'autoload': {'filetypes': ['php', 'phtml'] }}
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
@@ -82,7 +82,7 @@ endif
  nmap <silent> <C-y> "+Y
  imap <silent> <C-p> <Esc> "+pi
  nmap <silent> <C-p> "+p
- nmap <silent> <Leader>s :VimShell<CR>
+ nmap <silent> <Leader>s :VimShell -popup<CR>
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
 
  " VimProc Settings
@@ -91,8 +91,9 @@ endif
  " Unite Keys
  call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
- nnoremap <Leader>f :Unite find:.<CR>
- nnoremap <leader>r :Unite -start-insert file_rec/async:!<CR>
+ nnoremap <Leader>rf :Unite find:.<CR>
+ nnoremap <leader>ra :Unite -start-insert file_rec/async:!<CR>
+ nnoremap <Leader>f :Unite grep:*<CR>
 
 " UniteSession Settings
 let g:unite_source_session_enable_auto_save = 1
