@@ -33,7 +33,7 @@ endif
  NeoBundle 'tacroe/unite-mark'
  NeoBundle 'Shougo/neocomplete.vim'
  NeoBundle 'Shougo/vimshell.vim'
- NeoBundle 'Shougo/neosnippet.vim', {'depends': 'Shougo/neosnippet-snippets'}
+ NeoBundle 'Shougo/neosnippet.vim', {'depends': ['Shougo/neosnippet-snippets', 'honza/vim-snippets']}
  NeoBundle 'Shougo/vimfiler.vim'
  NeoBundle 'jimsei/winresizer'
  NeoBundleLazy 'davidhalter/jedi-vim', {'autoload': {'filetypes': ['python'] }}
@@ -55,6 +55,7 @@ endif
  NeoBundleLazy 'm2mdas/phpcomplete-extended', {'autoload': {'filetypes': ['php', 'phtml'] }}
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+ NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
 
  " Installation check.
  NeoBundleCheck
@@ -239,7 +240,7 @@ nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOT
 nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 
 " Javascript
-au FileType javascript call JavaScriptFold()
+"au FileType javascript call JavaScriptFold()
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
