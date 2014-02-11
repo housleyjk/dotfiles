@@ -91,7 +91,7 @@ endif
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
 
  " Auto commands
- au FileType html,php,phtml,javascript,vim setlocal shiftwidth=2 softtabstop=2
+ au FileType html,php,phtml,javascript,vim,yaml setlocal shiftwidth=2 softtabstop=2
 
  " VimProc Settings
  nmap ~ :VimProcBang<Space>
