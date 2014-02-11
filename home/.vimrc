@@ -63,6 +63,7 @@ endif
  " Key bindings
  filetype plugin indent on     " Required!
  syntax on
+ set foldmethod=indent
  set background=dark
  set t_Co=256
  set number
@@ -74,6 +75,9 @@ endif
  set hlsearch
  colorscheme jellybeans
  set guioptions-=T  "remove toolbar
+ set guioptions-=m  "remove menu bar
+ set guioptions-=r  "remove right-hand scroll bar
+ set guioptions-=L  "remove left-hand scroll bar
  set nowrap
  set laststatus=2
 
@@ -86,11 +90,14 @@ endif
  nmap <silent> <Leader>s :VimShell -popup<CR>
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
 
+ " Auto commands
+ au FileType html,php,phtml,javascript,vim setlocal shiftwidth=2 softtabstop=2
+
  " VimProc Settings
  nmap ~ :VimProcBang<Space>
 
  " Unite Keys
- call unite#filters#matcher_default#use(['matcher_fuzzy'])
+ "call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
  nnoremap <Leader>rf :Unite find:.<CR>
  nnoremap <leader>ra :Unite -start-insert file_rec/async:!<CR>
@@ -112,7 +119,8 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_buffers = 1
-let g:airline_theme="luna"
+"let g:airline_theme="luna"
+let g:airline_theme="lucius"
 
 " Neocomplete Settings
 " Disable AutoComplPop.
@@ -206,6 +214,7 @@ let g:vimfiler_as_default_explorer=1
 let g:vimfiler_ignore_pattern = '^\.\|\.pyc$'
 "let g:vimfiler_edit_action='tabopen'
 nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
+nnoremap <Leader>e :VimFiler<CR>
 
 " UndoTree Settings
 if has("persistent_undo")
@@ -228,10 +237,10 @@ if executable('ag')
       \  '--ignore node_modules --ignore bower_components'
   let g:unite_source_grep_recursive_opt = ''
 
-  "let g:unite_source_rec_async_command =
-          "\  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
-          "\  '--ignore .git --ignore .bzr --ignore node_modules ' .
-          "\  '--ignore bower_components --hidden -g '
+  let g:unite_source_rec_async_command =
+          \  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
+          \  '--ignore .git --ignore .bzr --ignore node_modules ' .
+          \  '--ignore bower_components --hidden -g '
 endif
 
 " Inline Task mappings
