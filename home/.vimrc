@@ -56,6 +56,7 @@ endif
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
  NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
+ NeoBundle 'edkolev/promptline.vim'
 
  " Installation check.
  NeoBundleCheck
@@ -93,9 +94,6 @@ endif
  " Auto commands
  au FileType html,php,phtml,javascript,vim,yaml setlocal shiftwidth=2 softtabstop=2
 
- " VimProc Settings
- nmap ~ :VimProcBang<Space>
-
  " Unite Keys
  "call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
@@ -130,7 +128,7 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#sources#syntax#min_keyword_length = 4
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
@@ -171,7 +169,7 @@ inoremap <expr><C-e> neocomplete#cancel_popup()
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
@@ -237,10 +235,10 @@ if executable('ag')
       \  '--ignore node_modules --ignore bower_components'
   let g:unite_source_grep_recursive_opt = ''
 
-  let g:unite_source_rec_async_command =
-          \  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
-          \  '--ignore .git --ignore .bzr --ignore node_modules ' .
-          \  '--ignore bower_components --hidden -g '
+  "let g:unite_source_rec_async_command =
+          "\  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
+          "\  '--ignore .git --ignore .bzr --ignore node_modules ' .
+          "\  '--ignore bower_components --hidden -g '
 endif
 
 " Inline Task mappings
