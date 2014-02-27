@@ -19,7 +19,7 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-export APPLICATION_ENV=jason_dev
+export APPLICATION_ENV=jason_dev  # PHP (Letstruck) APP Environment
 export WORKON_HOME=$HOME/.env
 source /usr/local/bin/virtualenvwrapper.sh
 export PYTHONSTARTUP=~/.pythonrc

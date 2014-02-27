@@ -6,6 +6,8 @@ if has('vim_starting')
 
 if has('gui_running')
   set guifont=Liberation\ Mono\ for\ Powerline\ 10
+  " Maximize gvim window on startup
+  "set lines=999 columns=999
 endif
 
  call neobundle#rc(expand('~/.vim/bundle/'))
@@ -32,7 +34,7 @@ endif
  NeoBundle 'Shougo/unite-ssh'
  NeoBundle 'tacroe/unite-mark'
  NeoBundle 'Shougo/neocomplete.vim'
- NeoBundle 'Shougo/vimshell.vim'
+ "NeoBundle 'Shougo/vimshell.vim'
  NeoBundle 'Shougo/neosnippet.vim', {'depends': ['Shougo/neosnippet-snippets', 'honza/vim-snippets']}
  NeoBundle 'Shougo/vimfiler.vim'
  NeoBundle 'jimsei/winresizer'
@@ -51,7 +53,7 @@ endif
  NeoBundle 'housleyjk/vim-multiple-cursors'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
- "NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
+ NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
  NeoBundleLazy 'm2mdas/phpcomplete-extended', {'autoload': {'filetypes': ['php', 'phtml'] }}
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
@@ -246,8 +248,8 @@ nmap <Leader>tl :Unite -silent -auto-resize grep:*::TODO\|Todo\|todo\|FIXME\|NOT
 nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 
-" Javascript
-"au FileType javascript call JavaScriptFold()
+" php extended settings
+let g:phpcomplete_index_composer_command = 'composer'
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
