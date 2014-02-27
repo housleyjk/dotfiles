@@ -114,6 +114,7 @@ if ! shopt -oq posix; then
 fi
 
 
+export APPLICATION_ENV=jason_dev  # PHP (letstruck) ENV name
 export WORKON_HOME=$HOME/.env
 source /usr/local/bin/virtualenvwrapper.sh
 export PYTHONSTARTUP=~/.pythonrc
