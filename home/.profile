@@ -20,10 +20,4 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 export APPLICATION_ENV=jason_dev  # PHP (Letstruck) APP Environment
-export WORKON_HOME=$HOME/.env
-source /usr/local/bin/virtualenvwrapper.sh
 export PYTHONSTARTUP=~/.pythonrc
-
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
-homeshick --quiet refresh

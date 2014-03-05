@@ -7,7 +7,6 @@ if has('vim_starting')
 if has('gui_running')
   set guifont=Liberation\ Mono\ for\ Powerline\ 10
   " Maximize gvim window on startup
-  "set lines=999 columns=999
 endif
 
  call neobundle#rc(expand('~/.vim/bundle/'))
@@ -175,7 +174,6 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
@@ -250,6 +248,12 @@ nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXM
 
 " php extended settings
 let g:phpcomplete_index_composer_command = 'composer'
+
+" mustache settings
+autocmd BufNewFile,BufRead *.hbs setfiletype mustache
+
+" syntastic settings
+let g:syntastic_python_flake8_args='--ignore=F403'
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.

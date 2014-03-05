@@ -114,3 +114,8 @@ if ! shopt -oq posix; then
 fi
 
 
+export WORKON_HOME=$HOME/.env
+source /usr/local/bin/virtualenvwrapper.sh
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+homeshick --quiet refresh
