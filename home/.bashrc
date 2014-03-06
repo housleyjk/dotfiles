@@ -115,6 +115,7 @@ fi
 
 
 export WORKON_HOME=$HOME/.env
+export PYTHONSTARTUP=~/.pythonrc
 source /usr/local/bin/virtualenvwrapper.sh
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"

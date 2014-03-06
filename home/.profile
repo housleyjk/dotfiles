@@ -20,4 +20,3 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 export APPLICATION_ENV=jason_dev  # PHP (Letstruck) APP Environment
-export PYTHONSTARTUP=~/.pythonrc

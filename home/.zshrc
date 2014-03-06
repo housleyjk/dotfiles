@@ -37,7 +37,7 @@ ZSH_THEME="gallois"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment following line if you want to  shown in the command execution time stamp 
+# Uncomment following line if you want to  shown in the command execution time stamp
 # in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
 # yyyy-mm-dd
 # HIST_STAMPS="mm/dd/yyyy"
@@ -45,7 +45,7 @@ ZSH_THEME="gallois"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git github gitignore python pip pyenv pep8 django celery composer bower npm postgres redis-cli sudo taskwarrior tmux virtualenv virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -59,7 +59,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
-# fi
+# fi`
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -68,4 +68,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 
+export PYTHONSTARTUP=~/.pythonrc
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
