@@ -45,7 +45,7 @@ ZSH_THEME="gallois"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github gitignore python pip pyenv pep8 django celery composer bower npm postgres redis-cli sudo taskwarrior tmux virtualenv virtualenvwrapper)
+plugins=(tmux git github gitignore python pip pep8 django celery composer bower npm postgres redis-cli sudo taskwarrior virtualenv virtualenvwrapper virtualenv-prompt)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -67,7 +67,9 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+alias tmux="TERM=xterm-color tmux -2"
 
+export WORKON_HOME=$HOME/.env
 export PYTHONSTARTUP=~/.pythonrc
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
