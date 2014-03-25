@@ -83,7 +83,7 @@ endif
  set guioptions-=L  "remove left-hand scroll bar
  set nowrap
  set laststatus=2
- set completeopt='menu'
+ set completeopt="menu"
 
  imap <silent> <C-j> <Esc>:w<CR>
  nmap <silent> <C-j> :w<CR>
