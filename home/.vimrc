@@ -53,7 +53,6 @@ endif
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
  NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
- "NeoBundleLazy 'm2mdas/phpcomplete-extended', {'autoload': {'filetypes': ['php', 'phtml'] }}
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
  NeoBundle 'edkolev/tmuxline.vim'
@@ -84,6 +83,7 @@ endif
  set guioptions-=L  "remove left-hand scroll bar
  set nowrap
  set laststatus=2
+ set completeopt="menu"
 
  imap <silent> <C-j> <Esc>:w<CR>
  nmap <silent> <C-j> :w<CR>
@@ -95,7 +95,7 @@ endif
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
 
  " Auto commands
- au FileType html,php,phtml,javascript,vim,yaml setlocal shiftwidth=2 softtabstop=2
+ au FileType html,htmldjango,php,phtml,javascript,vim,yaml setlocal shiftwidth=2 softtabstop=2
 
  " Unite Keys
  "call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -134,16 +134,26 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 4
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
+let g:neocomplete#enable_prefetch = 0
+let g:neocomplete#skip_auto_completion_time = "1.0"
+
+if !exists('g:neocomplete#sources')
+  let g:neocomplete#sources = {}
+endif
+let g:neocomplete#sources.php = ['member']
+
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ }
 
+
 " Define keyword.
  if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
  endif
+
  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
@@ -172,7 +182,7 @@ inoremap <expr><C-e> neocomplete#cancel_popup()
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
