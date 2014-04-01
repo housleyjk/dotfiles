@@ -8,3 +8,4 @@ export WORKON_HOME=$HOME/.env
 export PYTHONSTARTUP=~/.pythonrc
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
+source ~/.shell_prompt.sh

@@ -28,17 +28,17 @@ endif
 
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'Shougo/unite-session'
- NeoBundle 'tsukkee/unite-tag'
+ NeoBundleLazy 'tsukkee/unite-tag'
  NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/unite-ssh'
- NeoBundle 'tacroe/unite-mark'
- NeoBundle 'Shougo/neocomplete.vim'
- NeoBundle 'Shougo/vimshell.vim'
- NeoBundle 'Shougo/neosnippet.vim', {'depends': ['Shougo/neosnippet-snippets', 'honza/vim-snippets']}
+ NeoBundleLazy 'tacroe/unite-mark'
+ NeoBundleLazy 'Shougo/neocomplete.vim'
+ NeoBundleLazy 'Shougo/vimshell.vim'
+ NeoBundleLazy 'Shougo/neosnippet.vim', {'depends': ['Shougo/neosnippet-snippets', 'honza/vim-snippets']}
  NeoBundle 'Shougo/vimfiler.vim'
  NeoBundle 'jimsei/winresizer'
- NeoBundleLazy 'davidhalter/jedi-vim', {'autoload': {'filetypes': ['python'] }}
- NeoBundle 'mhinz/vim-signify'
+ NeoBundleLazy 'davidhalter/jedi-vim'
+ NeoBundleLazy 'mhinz/vim-signify'
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'mbbill/undotree'
  NeoBundle 'h1mesuke/unite-outline'
@@ -49,13 +49,14 @@ endif
  NeoBundle 'vim-scripts/sudo.vim'
  NeoBundle 'bling/vim-airline'
  NeoBundle 'jmcantrell/vim-virtualenv'
- NeoBundle 'housleyjk/vim-multiple-cursors'
+ NeoBundleLazy 'housleyjk/vim-multiple-cursors'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
- NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
+ NeoBundleLazy 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
  NeoBundle 'edkolev/tmuxline.vim'
+ NeoBundle 'edkolev/promptline.vim'
  NeoBundle 'epeli/slimux'
 
  " Installation check.
@@ -127,7 +128,7 @@ let g:airline_theme="lucius"
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
@@ -266,6 +267,15 @@ autocmd BufNewFile,BufRead *.hbs setfiletype mustache
 
 " syntastic settings
 let g:syntastic_python_flake8_args='--ignore=F403'
+
+" promptline settings
+" sections (a, b, c, x, y, z, warn) are optional
+let g:promptline_preset = {
+  \'a' : [ promptline#slices#python_virtualenv() ],
+  \'b' : [ promptline#slices#user() ],
+  \'c' : [ promptline#slices#cwd() ],
+  \'y' : [ promptline#slices#vcs_branch() ],
+  \'warn' : [ promptline#slices#last_exit_code() ]}
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
