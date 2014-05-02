@@ -56,6 +56,7 @@ endif
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
  NeoBundle 'edkolev/tmuxline.vim'
+ NeoBundle 'edkolev/promptline.vim'
  NeoBundle 'epeli/slimux'
 
  " Installation check.
@@ -95,7 +96,7 @@ endif
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
 
  " Auto commands
- au FileType html,htmldjango,php,phtml,javascript,vim,yaml setlocal shiftwidth=2 softtabstop=2
+ au FileType html,htmldjango,php,phtml,javascript,vim,yaml,mustache setlocal shiftwidth=2 softtabstop=2
 
  " Unite Keys
  "call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -267,6 +268,13 @@ autocmd BufNewFile,BufRead *.hbs setfiletype mustache
 " syntastic settings
 let g:syntastic_python_flake8_args='--ignore=F403'
 
+" promptline settings
+let g:promptline_preset = {
+        \'a' : [ promptline#slices#python_virtualenv() ],
+        \'b' : [ promptline#slices#user() ],
+        \'c' : [ promptline#slices#cwd() ],
+        \'y' : [ promptline#slices#vcs_branch() ],
+        \'warn' : [ promptline#slices#last_exit_code() ]}
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
