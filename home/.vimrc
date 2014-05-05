@@ -32,32 +32,33 @@ endif
  NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/unite-ssh'
  NeoBundleLazy 'tacroe/unite-mark'
- NeoBundleLazy 'Shougo/neocomplete.vim'
- NeoBundleLazy 'Shougo/vimshell.vim'
- NeoBundleLazy 'Shougo/neosnippet.vim', {'depends': ['Shougo/neosnippet-snippets', 'honza/vim-snippets']}
  NeoBundle 'Shougo/vimfiler.vim'
  NeoBundle 'jimsei/winresizer'
- NeoBundleLazy 'davidhalter/jedi-vim'
  NeoBundleLazy 'mhinz/vim-signify'
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'mbbill/undotree'
  NeoBundle 'h1mesuke/unite-outline'
  NeoBundle 'scrooloose/syntastic'
  NeoBundle 'scrooloose/nerdcommenter'
- NeoBundle 'tpope/vim-unimpaired'
  NeoBundle 'nanotech/jellybeans.vim'
  NeoBundle 'vim-scripts/sudo.vim'
  NeoBundle 'bling/vim-airline'
- NeoBundle 'jmcantrell/vim-virtualenv'
- NeoBundleLazy 'housleyjk/vim-multiple-cursors'
+ NeoBundle 'housleyjk/vim-virtualenv'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
- NeoBundleLazy 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
  NeoBundle 'edkolev/tmuxline.vim'
  NeoBundle 'edkolev/promptline.vim'
  NeoBundle 'epeli/slimux'
+ NeoBundle 'housleyjk/vim-hybrid'
+
+ NeoBundle 'christoomey/vim-tmux-navigator'
+ NeoBundle 'Valloric/YouCompleteMe', {
+   \ 'vim_version':'7.3.584',
+   \ 'build' : { 'unix' : './install.sh --clang-completer' },
+   \ }
+
 
  " Installation check.
  NeoBundleCheck
@@ -77,7 +78,7 @@ endif
  set scrolloff=5
  set hlsearch
  set t_ut=
- colorscheme jellybeans
+ colorscheme hybrid "jellybeans
  set guioptions-=T  "remove toolbar
  set guioptions-=m  "remove menu bar
  set guioptions-=r  "remove right-hand scroll bar
@@ -92,7 +93,6 @@ endif
  nmap <silent> <C-y> "+Y
  imap <silent> <C-p> <Esc> "+pi
  nmap <silent> <C-p> "+p
- nmap <silent> <Leader>s :VimShell -popup<CR>
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
 
  " Auto commands
@@ -124,102 +124,6 @@ let g:airline#extensions#tabline#show_buffers = 1
 "let g:airline_theme="luna"
 let g:airline_theme="lucius"
 
-" Neocomplete Settings
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 0
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 4
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-let g:neocomplete#enable_prefetch = 0
-let g:neocomplete#skip_auto_completion_time = "1.0"
-
-if !exists('g:neocomplete#sources')
-  let g:neocomplete#sources = {}
-endif
-let g:neocomplete#sources.php = ['member']
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ }
-
-
-" Define keyword.
- if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
- endif
-
- let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
- inoremap <expr><C-g> neocomplete#undo_completion()
- inoremap <expr><C-l> neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
- inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
- function! s:my_cr_function()
-    "return neocomplete#close_popup() . "\<CR>"
-   " For no inserting <CR> key.
-   return pumvisible() ? neocomplete#close_popup() : "\<CR>"
- endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplete#close_popup()
-inoremap <expr><C-e> neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=jedi#completions
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-
-let g:neocomplete#force_omni_input_patterns.python =
-\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-
-" Jedi-Vim Settings
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#completions_enabled=0
-let g:jedi#popup_select_first = 0
-let g:jedi#use_tabs_not_buffers = 0
-
-
-" NeoSnippet Settings
-
-map <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
- imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)"
- \: pumvisible() ? "\<C-n>" : "\<TAB>"
- smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)"
- \: "\<TAB>"
-
-" For snippet_complete marker.
-  if has('conceal')
-    set conceallevel=2 concealcursor=i
-  endif
-
 "VimFiler Settings
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_ignore_pattern = '^\.\|\.pyc$'
@@ -248,19 +152,16 @@ if executable('ag')
       \  '--ignore node_modules --ignore bower_components'
   let g:unite_source_grep_recursive_opt = ''
 
-  "let g:unite_source_rec_async_command =
-          "\  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
-          "\  '--ignore .git --ignore .bzr --ignore node_modules ' .
-          "\  '--ignore bower_components --hidden -g '
+  let g:unite_source_rec_async_command =
+          \  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
+          \  '--ignore .git --ignore .bzr --ignore node_modules ' .
+          \  '--ignore bower_components --hidden -g '
 endif
 
 " Inline Task mappings
 nmap <Leader>tl :Unite -silent -auto-resize grep:*::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
-
-" php extended settings
-let g:phpcomplete_index_composer_command = 'composer'
 
 " mustache settings
 autocmd BufNewFile,BufRead *.hbs setfiletype mustache
@@ -276,6 +177,14 @@ let g:promptline_preset = {
   \'c' : [ promptline#slices#cwd() ],
   \'y' : [ promptline#slices#vcs_branch() ],
   \'warn' : [ promptline#slices#last_exit_code() ]}
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-w>h :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-w>j :TmuxNavigateDown<cr>
+nnoremap <silent> <c-w>k :TmuxNavigateUp<cr>
+nnoremap <silent> <c-w>l :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
