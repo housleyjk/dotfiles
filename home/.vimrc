@@ -121,8 +121,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_buffers = 1
-"let g:airline_theme="luna"
-let g:airline_theme="lucius"
+"let g:airline_theme="lucius"
 
 "VimFiler Settings
 let g:vimfiler_as_default_explorer=1
