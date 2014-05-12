@@ -16,49 +16,53 @@ endif
  " Bundles
  " Note: You don't set neobundle setting in .gvimrc!
  " Let NeoBundle manage NeoBundle
- NeoBundleFetch 'Shougo/neobundle.vim'
- NeoBundle 'Shougo/neobundle-vim-recipes'
+ NeoBundleFetch  'Shougo/neobundle.vim'
+ NeoBundle       'Shougo/neobundle-vim-recipes'
 
- NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-  \     'unix' : 'make -f make_unix.mak',
+ NeoBundle       'Shougo/vimproc', {
+  \              'build' : {
+  \              'unix' : 'make -f make_unix.mak',
   \    },
   \ }
 
 
- NeoBundle 'Shougo/unite.vim'
- NeoBundle 'Shougo/unite-session'
- NeoBundleLazy 'tsukkee/unite-tag'
- NeoBundle 'Shougo/unite-sudo'
- NeoBundle 'Shougo/unite-ssh'
- NeoBundleLazy 'tacroe/unite-mark'
- NeoBundle 'Shougo/vimfiler.vim'
- NeoBundle 'jimsei/winresizer'
- NeoBundleLazy 'mhinz/vim-signify'
- NeoBundle 'tpope/vim-fugitive'
- NeoBundle 'mbbill/undotree'
- NeoBundle 'h1mesuke/unite-outline'
- NeoBundle 'scrooloose/syntastic'
- NeoBundle 'scrooloose/nerdcommenter'
- NeoBundle 'nanotech/jellybeans.vim'
- NeoBundle 'vim-scripts/sudo.vim'
- NeoBundle 'bling/vim-airline'
- NeoBundle 'housleyjk/vim-virtualenv'
- NeoBundle 'tpope/vim-surround'
- NeoBundle 'tpope/vim-repeat'
- NeoBundle 'vim-scripts/matchit.zip'
- NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
- NeoBundle 'edkolev/tmuxline.vim'
- NeoBundle 'edkolev/promptline.vim'
- NeoBundle 'epeli/slimux'
- NeoBundle 'housleyjk/vim-hybrid'
-
- NeoBundle 'christoomey/vim-tmux-navigator'
- NeoBundle 'Valloric/YouCompleteMe', {
-   \ 'vim_version':'7.3.584',
-   \ 'build' : { 'unix' : './install.sh --clang-completer' },
-   \ }
-
+ NeoBundle       'Shougo/unite.vim'
+ NeoBundle       'Shougo/unite-session'
+ NeoBundleLazy   'tsukkee/unite-tag'
+ NeoBundle       'Shougo/unite-sudo'
+ NeoBundle       'Shougo/unite-ssh'
+ NeoBundle       'tacroe/unite-mark'
+ NeoBundle       'Shougo/vimfiler.vim'
+ NeoBundle       'jimsei/winresizer'
+ NeoBundleLazy   'mhinz/vim-signify'
+ NeoBundle       'tpope/vim-fugitive'
+ NeoBundle       'mbbill/undotree'
+ NeoBundle       'h1mesuke/unite-outline'
+ NeoBundle       'scrooloose/syntastic'
+ NeoBundle       'scrooloose/nerdcommenter'
+ NeoBundle       'nanotech/jellybeans.vim'
+ NeoBundle       'vim-scripts/sudo.vim'
+ NeoBundle       'bling/vim-airline'
+ NeoBundle       'housleyjk/vim-virtualenv'
+ NeoBundle       'tpope/vim-surround'
+ NeoBundle       'tpope/vim-repeat'
+ NeoBundle       'vim-scripts/matchit.zip'
+ NeoBundleLazy   'mustache/vim-mustache-handlebars', {
+  \              'autoload': {
+  \                  'filetypes': ['hbs',' mustache', 'handlebars', 'html']
+  \                  },
+  \              }
+ NeoBundle       'edkolev/tmuxline.vim'
+ NeoBundle       'edkolev/promptline.vim'
+ NeoBundle       'epeli/slimux'
+ NeoBundle       'housleyjk/vim-hybrid'
+ NeoBundle       'godlygeek/tabular'
+ NeoBundle       'christoomey/vim-tmux-navigator'
+ NeoBundle       'Valloric/YouCompleteMe', {
+   \             'vim_version':'7.3.584',
+   \                 'build' : { 'unix': './install.sh --clang-completer' },
+   \              }
+ NeoBundle       'atsepkov/vim-tabularity'
 
  " Installation check.
  NeoBundleCheck
@@ -110,14 +114,14 @@ let g:unite_source_session_enable_auto_save = 1
 
 
 " Airline Settings
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_buffers = 1
@@ -151,10 +155,10 @@ if executable('ag')
       \  '--ignore node_modules --ignore bower_components'
   let g:unite_source_grep_recursive_opt = ''
 
-  let g:unite_source_rec_async_command =
-          \  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
-          \  '--ignore .git --ignore .bzr --ignore node_modules ' .
-          \  '--ignore bower_components --hidden -g '
+  "let g:unite_source_rec_async_command =
+          "\  'ag --nocolor --nogroup --ignore .hg --ignore .svn ' .
+          "\  '--ignore .git --ignore .bzr --ignore node_modules ' .
+          "\  '--ignore bower_components --hidden -g '
 endif
 
 " Inline Task mappings
@@ -166,7 +170,7 @@ nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXM
 autocmd BufNewFile,BufRead *.hbs setfiletype mustache
 
 " syntastic settings
-let g:syntastic_python_flake8_args='--ignore=F403'
+let g:syntastic_python_flake8_args='--ignore=F403,E501'
 
 " promptline settings
 " sections (a, b, c, x, y, z, warn) are optional
