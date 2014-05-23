@@ -3,6 +3,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 alias tmux="TERM=xterm-color tmux -2"
+alias history="history 0"
 
 export WORKON_HOME=$HOME/.env
 export PYTHONSTARTUP=~/.pythonrc
