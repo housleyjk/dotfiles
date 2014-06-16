@@ -67,6 +67,8 @@ endif
  NeoBundle 'mattn/emmet-vim'
  NeoBundle 'suan/vim-instant-markdown'
  NeoBundle 'thinca/vim-qfreplace'
+ NeoBundle 'saltstack/salt-vim'
+
 
  " Installation check.
  NeoBundleCheck
@@ -106,7 +108,7 @@ endif
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
 
  " Auto commands
- au FileType html,htmldjango,php,phtml,javascript,vim,yaml,mustache setlocal shiftwidth=2 softtabstop=2
+ au FileType html,htmldjango,php,phtml,javascript,vim,yaml,mustache,ruby,erb,htmljinja,jinja,sls setlocal shiftwidth=2 softtabstop=2
  au BufNewFile,BufRead *.md set filetype=markdown
 
  " Unite Keys
@@ -201,11 +203,13 @@ endfunction
 
 command! -bar -nargs=? Workon :call s:activate_ycmvirtualenv(<q-args>)
 
-nnoremap <Leader>k :YcmCompleter GoToDefinition<CR>
-
+nnoremap <Leader>g :YcmCompleter GoToDefinition<CR>
 
 " Emmet settings
 let g:user_emmet_leader_key='<c-h>'
+
+" Easytags settings
+let g:easytags_updatetime_min = 10000
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
