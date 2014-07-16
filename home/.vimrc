@@ -42,9 +42,7 @@ if has('vim_starting')
  NeoBundle 'edkolev/promptline.vim'
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundle 'nanotech/jellybeans.vim'
-
-
-
+ NeoBundle 'majutsushi/tagbar'
 
  " Installation check.
  NeoBundleCheck
@@ -65,24 +63,29 @@ if has('vim_starting')
  set guioptions-=T  "remove toolbar
  set nowrap
  set laststatus=2
- set clipboard=unnamedplus
 
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
  nnoremap ; :
- 
+
  " Unite Keys
  "call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
  nnoremap <Leader>rf :Unite find:.<CR>
  nnoremap <leader>ra :Unite -start-insert file_rec/async:!<CR>
  nnoremap <Leader>f :Unite grep:*<CR>
-    
 
 " Airline Settings
-let g:airline#extensions#tabline#enabled = 1 
-let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_theme="lucius"
 
 "VimFiler Settings
@@ -131,6 +134,9 @@ let g:promptline_preset = {
     \'warn' : [ promptline#slices#last_exit_code() ]}
 
 command! -bar -nargs=? Workon :call s:activate_ycmvirtualenv(<q-args>)
+
+" Tagbar settings
+nmap <Leader>o :TagbarToggle<CR>
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
