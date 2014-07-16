@@ -20,7 +20,6 @@ if has('vim_starting')
   \    },
   \ }
 
-
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'tacroe/unite-mark'
  NeoBundle 'Shougo/vimfiler.vim'
@@ -28,15 +27,24 @@ if has('vim_starting')
  NeoBundle 'mhinz/vim-signify'
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'mbbill/undotree'
- NeoBundle 'h1mesuke/unite-outline'
  NeoBundle 'scrooloose/syntastic'
  NeoBundle 'scrooloose/nerdcommenter'
  NeoBundle 'tpope/vim-unimpaired'
- NeoBundle 'nanotech/jellybeans.vim'
+ NeoBundle 'housleyjk/vim-hybrid'
  NeoBundle 'bling/vim-airline'
- NeoBundleLazy 'jmcantrell/vim-virtualenv', {'autoload': {'filetypes': ['python'] }}
+ NeoBundleLazy 'housleyjk/vim-virtualenv', {'autoload': {'filetypes': ['python'] }}
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
+ NeoBundle 'saltstack/salt-vim'
+ NeoBundle 'elzr/vim-json'
+ NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
+ NeoBundle 'edkolev/tmuxline.vim'
+ NeoBundle 'edkolev/promptline.vim'
+ NeoBundle 'vim-scripts/matchit.zip'
+ NeoBundle 'nanotech/jellybeans.vim'
+
+
+
 
  " Installation check.
  NeoBundleCheck
@@ -53,26 +61,22 @@ if has('vim_starting')
  set softtabstop=4
  set scrolloff=5
  set hlsearch
- colorscheme jellybeans
+ colorscheme hybrid
  set guioptions-=T  "remove toolbar
  set nowrap
  set laststatus=2
+ set clipboard=unnamedplus
 
- imap <silent> <C-j> <Esc>:w<CR>
- nmap <silent> <C-j> :w<CR>
- vmap <silent> <C-y> "+y
- nmap <silent> <C-y> "+Y
- imap <silent> <C-p> <Esc> "+pi
- nmap <silent> <C-p> "+p
-
- " VimProc Settings
- nmap ~ :VimProcBang<Space>
-
+ nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
+ nnoremap ; :
+ 
  " Unite Keys
- call unite#filters#matcher_default#use(['matcher_fuzzy'])
+ "call unite#filters#matcher_default#use(['matcher_fuzzy'])
  noremap <Leader><Leader> :Unite<Space>
- nnoremap <Leader>f :Unite find:.<CR>
- nnoremap <leader>r :<C-u>Unite -start-insert file_rec/async:!<CR>
+ nnoremap <Leader>rf :Unite find:.<CR>
+ nnoremap <leader>ra :Unite -start-insert file_rec/async:!<CR>
+ nnoremap <Leader>f :Unite grep:*<CR>
+    
 
 " Airline Settings
 let g:airline#extensions#tabline#enabled = 1 
@@ -114,6 +118,19 @@ nmap <Leader>tl :Unite -silent -auto-resize grep:*::TODO\|Todo\|todo\|FIXME\|NOT
 nmap <Leader>tf :Unite -silent -auto-resize grep:%::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXME\|NOTE<CR>
 
+" syntastic settings
+let g:syntastic_python_flake8_args='--ignore=F403'
+let g:syntastic_debug = 0
+
+" promptline settings
+let g:promptline_preset = {
+    \'a' : [ promptline#slices#python_virtualenv() ],
+    \'b' : [ promptline#slices#user() ],
+    \'c' : [ promptline#slices#cwd() ],
+    \'y' : [ promptline#slices#vcs_branch() ],
+    \'warn' : [ promptline#slices#last_exit_code() ]}
+
+command! -bar -nargs=? Workon :call s:activate_ycmvirtualenv(<q-args>)
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.

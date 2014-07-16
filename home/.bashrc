@@ -81,7 +81,7 @@ if ! shopt -oq posix; then
 fi
 
 
-export WORKON_HOME=$HOME/.env
+export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 export PYTHONSTARTUP=$HOME/.pythonrc
 
