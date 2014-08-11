@@ -90,8 +90,10 @@ let g:airline_theme="lucius"
 
 "VimFiler Settings
 let g:vimfiler_as_default_explorer=1
+let g:vimfiler_ignore_pattern = '^\.\|\.pyc$'
 "let g:vimfiler_edit_action='tabopen'
 nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
+nnoremap <Leader>e :VimFiler<CR>
 
 " UndoTree Settings
 if has("persistent_undo")

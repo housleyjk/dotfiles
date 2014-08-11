@@ -84,6 +84,8 @@ fi
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 export PYTHONSTARTUP=$HOME/.pythonrc
+alias tmux="TERM=xterm-color tmux -2"
+alias tmuxa="tmux a"
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
