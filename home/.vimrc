@@ -30,13 +30,11 @@ endif
  NeoBundle 'Shougo/unite-sudo'
  NeoBundle 'Shougo/unite-ssh'
  NeoBundle 'tacroe/unite-mark'
- NeoBundle 'Shougo/vimshell.vim'
  NeoBundle 'Shougo/vimfiler.vim'
  NeoBundle 'jimsei/winresizer'
  NeoBundle 'mhinz/vim-signify'
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'mbbill/undotree'
- NeoBundle 'h1mesuke/unite-outline'
  NeoBundle 'scrooloose/syntastic'
  NeoBundle 'scrooloose/nerdcommenter'
  NeoBundle 'nanotech/jellybeans.vim'
@@ -46,20 +44,17 @@ endif
  NeoBundle 'terryma/vim-multiple-cursors'
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
- NeoBundle 'xolox/vim-easytags', {'depends': 'xolox/vim-misc'}
  NeoBundle 'vim-scripts/matchit.zip'
  NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
  NeoBundle 'edkolev/tmuxline.vim'
  NeoBundle 'edkolev/promptline.vim'
  NeoBundle 'epeli/slimux'
-
  NeoBundle 'Valloric/YouCompleteMe.git' , {
            \ 'build' : {
            \    'unix' : './install.sh --clang-completer'
            \ },
  \ }
  NeoBundle 'SirVer/ultisnips', {'depends': 'honza/vim-snippets'}
-
  NeoBundle 'https://github.com/dhruvasagar/vim-table-mode'
  NeoBundle 'elzr/vim-json'
  NeoBundle 'godlygeek/tabular'
@@ -67,8 +62,9 @@ endif
  NeoBundle 'mattn/emmet-vim'
  NeoBundle 'suan/vim-instant-markdown'
  NeoBundle 'thinca/vim-qfreplace'
+ NeoBundle 'mitsuhiko/vim-jinja'
  NeoBundle 'saltstack/salt-vim'
-
+ NeoBundle 'majutsushi/tagbar'
 
  " Installation check.
  NeoBundleCheck
@@ -98,14 +94,12 @@ endif
  set completeopt="menu"
  set clipboard=unnamedplus
 
- imap <silent> <C-j> <Esc>:w<CR>
- nmap <silent> <C-j> :w<CR>
- vmap <silent> <C-y> "+y
- nmap <silent> <C-y> "+Y
- imap <silent> <C-p> <Esc> "+pi
- nmap <silent> <C-p> "+p
- nmap <silent> <Leader>s :VimShell -popup<CR>
+ "vmap <silent> <C-y> "+y
+ "nmap <silent> <C-y> "+Y
+ "imap <silent> <C-p> <Esc> "+pi
+ "nmap <silent> <C-p> "+p
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
+ nnoremap ; :
 
  " Auto commands
  au FileType html,htmldjango,php,phtml,javascript,vim,yaml,mustache,ruby,erb,htmljinja,jinja,sls setlocal shiftwidth=2 softtabstop=2
@@ -120,7 +114,6 @@ endif
 
 " UniteSession Settings
 let g:unite_source_session_enable_auto_save = 1
-
 
 " Airline Settings
 let g:airline#extensions#tabline#enabled = 0
@@ -208,8 +201,8 @@ nnoremap <Leader>g :YcmCompleter GoToDefinition<CR>
 " Emmet settings
 let g:user_emmet_leader_key='<c-h>'
 
-" Easytags settings
-let g:easytags_updatetime_min = 10000
+" Tagbar settings
+nmap <Leader>o :TagbarToggle<CR>
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
