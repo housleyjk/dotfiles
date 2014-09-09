@@ -47,7 +47,7 @@ if has('vim_starting')
  " Installation check.
  NeoBundleCheck
 
- " Key bindings
+ " Editor settings
  filetype plugin indent on     " Required!
  syntax on
  set background=dark
@@ -63,7 +63,11 @@ if has('vim_starting')
  set guioptions-=T  "remove toolbar
  set nowrap
  set laststatus=2
+ set backupdir=~/.vim/_backup//
+ set directory=~/.vim/_temp//
 
+
+ " Key bindings
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
  nnoremap ; :
 
