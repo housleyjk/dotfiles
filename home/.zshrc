@@ -5,9 +5,12 @@ fi
 alias tmux="TERM=xterm-color tmux -2"
 alias history="history 0"
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export PATH=$PATH:/usr/pgsql-9.4/bin
 export WORKON_HOME=$HOME/.env
 export PYTHONSTARTUP=~/.pythonrc
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 source ~/.shell_prompt.sh
+source ~/.uwsgi_completion.sh
 compctl -g '~/.teamocil/*(:t:r)' teamocil

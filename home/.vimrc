@@ -9,9 +9,9 @@ if has('gui_running')
   " Maximize gvim window on startup
 endif
 
- call neobundle#rc(expand('~/.vim/bundle/'))
-
  let mapleader=","
+
+ call neobundle#begin(expand('~/.vim/bundle/'))
 
  " Bundles
  " Let NeoBundle manage NeoBundle
@@ -45,17 +45,13 @@ endif
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'tpope/vim-repeat'
  NeoBundle 'vim-scripts/matchit.zip'
- NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars', 'html']}}
+ NeoBundleLazy 'mustache/vim-mustache-handlebars', {'autoload': {'filetypes': ['hbs', 'mustache', 'handlebars']}}
  NeoBundle 'edkolev/tmuxline.vim'
  NeoBundle 'edkolev/promptline.vim'
  NeoBundle 'epeli/slimux'
- NeoBundle 'Valloric/YouCompleteMe.git' , {
-           \ 'build' : {
-           \    'unix' : './install.sh --clang-completer'
-           \ },
- \ }
+ NeoBundle 'Valloric/YouCompleteMe'
  NeoBundle 'SirVer/ultisnips', {'depends': 'honza/vim-snippets'}
- NeoBundle 'https://github.com/dhruvasagar/vim-table-mode'
+ NeoBundle 'dhruvasagar/vim-table-mode'
  NeoBundle 'elzr/vim-json'
  NeoBundle 'godlygeek/tabular'
  NeoBundle 'housleyjk/vim-hybrid'
@@ -65,11 +61,19 @@ endif
  NeoBundle 'mitsuhiko/vim-jinja'
  NeoBundle 'saltstack/salt-vim'
  NeoBundle 'majutsushi/tagbar'
+ NeoBundle 'chiel92/vim-autoformat'
+ NeoBundle 'wavded/vim-stylus'
+ NeoBundle 'wting/rust.vim'
+ NeoBundle 'cespare/vim-toml'
+ NeoBundle 'ebfe/vim-racer'
+ NeoBundle 'vim-ember-script', {'depends': 'kchmck/vim-coffee-script'}
+
+ call neobundle#end()
 
  " Installation check.
  NeoBundleCheck
 
- " Key bindings
+ " Editor settings
  filetype plugin indent on     " Required!
  syntax on
  set foldmethod=indent
@@ -93,17 +97,23 @@ endif
  set laststatus=2
  set completeopt="menu"
  set clipboard=unnamedplus
+ set backupdir=~/.vim/_backup//
+ set directory=~/.vim/_temp//
 
+ " Key bindings
  "vmap <silent> <C-y> "+y
  "nmap <silent> <C-y> "+Y
  "imap <silent> <C-p> <Esc> "+pi
  "nmap <silent> <C-p> "+p
  nmap <silent> <Leader>ds :let _s=@/<Bar>:%s/\s\+$//<Bar>:let @/=_s<Bar>:noh<CR>
  nnoremap ; :
+ nmap <silent> <Leader>s viwy<Leader>f<c-r>0<CR>
 
  " Auto commands
  au FileType html,htmldjango,php,phtml,javascript,vim,yaml,mustache,ruby,erb,htmljinja,jinja,sls setlocal shiftwidth=2 softtabstop=2
  au BufNewFile,BufRead *.md set filetype=markdown
+ au BufNewFile,BufRead *.yaml set filetype=sls
+ au BufNewFile,BufRead *.ejs set filetype=html
 
  " Unite Keys
  "call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -131,7 +141,7 @@ let g:airline_theme="lucius"
 
 "VimFiler Settings
 let g:vimfiler_as_default_explorer=1
-let g:vimfiler_ignore_pattern = '^\.\|\.pyc$'
+let g:vimfiler_ignore_pattern = '^\.\|\.pyc$\|.*\.egg-info\|__pycache__'
 "let g:vimfiler_edit_action='tabopen'
 nnoremap <Leader>x :VimFiler -explorer -toggle<CR>
 nnoremap <Leader>e :VimFiler<CR>
@@ -141,7 +151,7 @@ if has("persistent_undo")
     set undodir=~/.vim/undodir
     set undofile
     set undolevels=1000 "maximum number of changes that can be undone
-    set undoreload=1000 "maximum number lines to save for undo on a buffer reload
+    set undoreload=100 "maximum number lines to save for undo on a buffer reload
 endif
 
 "NERDcommenter Settings
@@ -172,7 +182,7 @@ nmap <Leader>tr :Unite -silent -auto-resize grep:$buffer::TODO\|Todo\|todo\|FIXM
 autocmd BufNewFile,BufRead *.hbs setfiletype mustache
 
 " syntastic settings
-let g:syntastic_python_flake8_args='--ignore=F403'
+let g:syntastic_python_flake8_args='--ignore=F403,E501'
 let g:syntastic_debug = 0
 
 " promptline settings
@@ -203,6 +213,15 @@ let g:user_emmet_leader_key='<c-h>'
 
 " Tagbar settings
 nmap <Leader>o :TagbarToggle<CR>
+
+" Instant markdown settings
+let g:instant_markdown_autostart = 0
+
+" Easytag settings
+let g:easytags_async = 1
+
+" Racer settings
+let $RUST_SRC_PATH = $HOME . '/Development/rust/src'
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
