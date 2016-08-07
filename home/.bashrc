@@ -120,3 +120,11 @@ source /usr/local/bin/virtualenvwrapper.sh
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 homeshick --quiet refresh
+
+# added by travis gem
+[ -f /home/housl/.travis/travis.sh ] && source /home/housl/.travis/travis.sh
+
+# ibus
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
